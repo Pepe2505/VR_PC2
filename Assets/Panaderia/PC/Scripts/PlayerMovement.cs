@@ -2,23 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class playerMovement : MonoBehaviour
 {
-    public float Velocidad = 15f;
-
-    void Start()
-    {
-      
-    }
+    public float velocidad = 15f; // Cambio a minúscula por convención de nombres en C#
 
     void Update()
     {
-       float veloX = (Input.GetKey(KeyCode.D) ? 1 : 0) * Time.deltaTime * Velocidad;
-        Vector3 posicion = transform.position;
-        transform.position = new Vector3(veloX + posicion.x, posicion.y, posicion.z);
+        // Calculamos la dirección en X (1 si presiona D, -1 si presiona A, 0 si no presiona nada)
+        float inputX = (Input.GetKey(KeyCode.D) ? 1 : 0) + (Input.GetKey(KeyCode.A) ? -1 : 0);
 
-        float velox = (Input.GetKey(KeyCode.A) ? -1 : 0) * Time.deltaTime * Velocidad;
-        Vector3 posicion2 = transform.position;
-        transform.position = new Vector3(velox + posicion.x, posicion.y, posicion.z);
+        // Movemos el objeto sumando el desplazamiento calculado
+        transform.position += new Vector3(inputX * Time.deltaTime * velocidad, 0, 0);
     }
 }
+
